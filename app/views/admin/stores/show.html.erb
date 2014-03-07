@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="col-lg-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <%= @store.name %>
+      </div>
+      <div class="panel-body">
+        <p>
+          <strong>Address:</strong>
+          <%= @store.address %>
+        </p>
+
+        <p>
+          <strong>Latitude:</strong>
+          <%= @store.latitude %>
+        </p>
+
+        <p>
+          <strong>Longitude:</strong>
+          <%= @store.longitude %>
+        </p>
+
+        <% if @store.approved? %>
+          <span class="label label-default">Approved</span>
+        <% else %>
+          <%= link_to 'Approve', admin_store_approve_path(@store), class: "btn btn-sm btn-primary", method: :post %>
+        <% end %>
+      </div>
+    </div>
+    <div class="pull-right">
+      <%= link_to 'Edit', edit_admin_store_path(@store), class: "btn btn-default" %>
+      <%= link_to 'Back', admin_stores_path, class: "btn btn-default"  %>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <%= image_tag "http://maps.google.com/maps/api/staticmap?size=540x400&sensor=false&zoom=16&markers=#{@store.latitude}%2C#{@store.longitude}" %>
+      </div>
+    </div>
+  </div>
+
+

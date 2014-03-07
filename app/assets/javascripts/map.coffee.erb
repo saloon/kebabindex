@@ -1,0 +1,11 @@
+$ ->
+  if $('#map').length && typeof L != "undefined"
+    t = '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
+
+    map = L.map 'map',
+      center: [$('body').data('current-location')[0], $('body').data('current-location')[1]]
+      zoom: 13
+      layers: new L.TileLayer("http://{s}.tiles.mapbox.com/v3/nicolasdul.map-3douwicd/{z}/{x}/{y}.png", attribution: t)
+
+    for store in $('body').data('stores')
+      L.marker([store.latitude, store.longitude], title: store.name).addTo(map).bindPopup(store.name)
